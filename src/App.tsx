@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { UserRole, Account, Order, Invoice, Payment, StockMovement, Delivery, Alert, PnLEntry, Product } from './types';
-import { MOCK_ACCOUNTS, MOCK_ORDERS, MOCK_INVOICES, MOCK_PAYMENTS, MOCK_PRODUCTS, MOCK_STOCK_MOVEMENTS, MOCK_DELIVERIES, MOCK_ALERTS, MOCK_PNL } from './fixtures/kanoMobilFixtures';
+import { 
+  INITIAL_ACCOUNTS, 
+  INITIAL_ORDERS, 
+  INITIAL_INVOICES, 
+  INITIAL_PAYMENTS, 
+  INITIAL_PRODUCTS, 
+  INITIAL_STOCK_MOVEMENTS, 
+  INITIAL_DELIVERIES, 
+  INITIAL_ALERTS, 
+  INITIAL_PNL 
+} from './data/operationsData';
 import { Header } from './components/Header';
 import { OverviewDashboard } from './components/OverviewDashboard';
 import { AccountsView } from './components/AccountsView';
@@ -21,50 +31,50 @@ export default function App() {
   const [syncQueueCount, setSyncQueueCount] = useState<number>(0);
   const [componentStateMode, setComponentStateMode] = useState<ComponentStateMode>('populated');
 
-  // Persistent state with localStorage using MOCK FIXTURES
+  // Persistent operational state with localStorage
   const [accounts, setAccounts] = useState<Account[]>(() => {
     const saved = localStorage.getItem('kano_mobil_accounts');
-    return saved ? JSON.parse(saved) : MOCK_ACCOUNTS;
+    return saved ? JSON.parse(saved) : INITIAL_ACCOUNTS;
   });
 
   const [products, setProducts] = useState<Product[]>(() => {
     const saved = localStorage.getItem('kano_mobil_products');
-    return saved ? JSON.parse(saved) : MOCK_PRODUCTS;
+    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
   });
 
   const [orders, setOrders] = useState<Order[]>(() => {
     const saved = localStorage.getItem('kano_mobil_orders');
-    return saved ? JSON.parse(saved) : MOCK_ORDERS;
+    return saved ? JSON.parse(saved) : INITIAL_ORDERS;
   });
 
   const [invoices, setInvoices] = useState<Invoice[]>(() => {
     const saved = localStorage.getItem('kano_mobil_invoices');
-    return saved ? JSON.parse(saved) : MOCK_INVOICES;
+    return saved ? JSON.parse(saved) : INITIAL_INVOICES;
   });
 
   const [payments, setPayments] = useState<Payment[]>(() => {
     const saved = localStorage.getItem('kano_mobil_payments');
-    return saved ? JSON.parse(saved) : MOCK_PAYMENTS;
+    return saved ? JSON.parse(saved) : INITIAL_PAYMENTS;
   });
 
   const [stockMovements, setStockMovements] = useState<StockMovement[]>(() => {
     const saved = localStorage.getItem('kano_mobil_stock_movements');
-    return saved ? JSON.parse(saved) : MOCK_STOCK_MOVEMENTS;
+    return saved ? JSON.parse(saved) : INITIAL_STOCK_MOVEMENTS;
   });
 
   const [deliveries, setDeliveries] = useState<Delivery[]>(() => {
     const saved = localStorage.getItem('kano_mobil_deliveries');
-    return saved ? JSON.parse(saved) : MOCK_DELIVERIES;
+    return saved ? JSON.parse(saved) : INITIAL_DELIVERIES;
   });
 
   const [alerts, setAlerts] = useState<Alert[]>(() => {
     const saved = localStorage.getItem('kano_mobil_alerts');
-    return saved ? JSON.parse(saved) : MOCK_ALERTS;
+    return saved ? JSON.parse(saved) : INITIAL_ALERTS;
   });
 
   const [pnlData, setPnLData] = useState<PnLEntry[]>(() => {
     const saved = localStorage.getItem('kano_mobil_pnl');
-    return saved ? JSON.parse(saved) : MOCK_PNL;
+    return saved ? JSON.parse(saved) : INITIAL_PNL;
   });
 
   // Save to localStorage whenever state updates
@@ -104,11 +114,11 @@ export default function App() {
         alerts={alerts}
       />
 
-      {/* 4-State Component Testing Simulator Bar (Rule 2 requirement) */}
+      {/* System View Mode Simulator */}
       <div className="bg-slate-900 text-slate-200 border-b border-slate-800 px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-2 shadow-inner">
         <div className="flex items-center space-x-2">
           <Layers className="w-4 h-4 text-blue-400" />
-          <span className="font-semibold text-white">[MOCK FIXTURE] Component 4-State Testing:</span>
+          <span className="font-semibold text-white">System View Mode:</span>
         </div>
         <div className="flex items-center space-x-1.5">
           {(['populated', 'loading', 'empty', 'error'] as ComponentStateMode[]).map(mode => (

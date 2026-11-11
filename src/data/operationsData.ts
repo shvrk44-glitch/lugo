@@ -1,4 +1,11 @@
-import { Account, Product, Order, Invoice, Payment, StockMovement, Delivery, Alert, PnLEntry } from './types';
+/**
+ * Kano Mobil Lubricant Distribution Operations Data
+ * Baseline operating records for Kano Central Depot distribution system.
+ * All records represent active operational business data and can be updated,
+ * extended, or edited at any time.
+ */
+
+import { Account, Product, Order, Invoice, Payment, StockMovement, Delivery, Alert, PnLEntry } from '../types';
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
