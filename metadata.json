@@ -1,0 +1,6 @@
+{
+  "name": "Kano Mobil Operations Dashboard",
+  "description": "Operations dashboard and reporting tool for Kano Mobil lubricant distribution business.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
