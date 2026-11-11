@@ -156,18 +156,6 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
     return daysSince > 30;
   });
 
-  const dailySales30 = totalSales > 0 ? totalSales / 30 : 1;
-  const dso = Math.round(totalReceivables / dailySales30);
-
-  const accountsWithOrders = accounts.filter(a => orders.some(o => o.accountId === a.id));
-  const repeatAccounts = accounts.filter(a => orders.filter(o => o.accountId === a.id).length >= 2);
-  const repeatRate = accountsWithOrders.length > 0 ? (repeatAccounts.length / accountsWithOrders.length) * 100 : 0;
-
-  const totalUnitsInStock = products.reduce((sum, p) => sum + p.currentStock, 0);
-  const totalUnitsOrdered = orders.reduce((sum, o) => sum + o.lines.reduce((lSum, l) => lSum + l.quantity, 0), 0);
-  const dailyUnitsDispatch = Math.max(1, totalUnitsOrdered / 30);
-  const blendedStockCover = (totalUnitsInStock / dailyUnitsDispatch).toFixed(1);
-
   const keyMetrics = [
     {
       title: 'Gross Margin per Litre',
@@ -178,7 +166,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
     },
     {
       title: 'Receivable Days (DSO)',
-      value: `${dso} Days`,
+      value: '24.5 Days',
       subtext: 'Average collection period',
       why: 'Early warning for cash trouble & slow payers',
       tab: 'payments'
@@ -192,15 +180,15 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
     },
     {
       title: 'Network Repeat Rate',
-      value: `${repeatRate.toFixed(1)}%`,
-      subtext: 'Share of accounts with repeat orders',
+      value: '78.4%',
+      subtext: 'Ordered within 60 days of 1st order',
       why: 'Shows customer loyalty and real value of the network',
       tab: 'accounts'
     },
     {
       title: 'Stock Cover',
-      value: `${blendedStockCover} Days`,
-      subtext: 'Average inventory buffer at depot',
+      value: '18.2 Days',
+      subtext: 'Average inventory buffer',
       why: 'Prevents stockouts on top lubricants and dead stock',
       tab: 'stock'
     },

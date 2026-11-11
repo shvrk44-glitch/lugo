@@ -174,13 +174,8 @@ export default function App() {
             setOrders={setOrders}
             accounts={accounts}
             products={products}
-            setProducts={setProducts}
             invoices={invoices}
             setInvoices={setInvoices}
-            deliveries={deliveries}
-            setDeliveries={setDeliveries}
-            stockMovements={stockMovements}
-            setStockMovements={setStockMovements}
             currentRole={currentRole}
             stateMode={componentStateMode}
           />
@@ -221,10 +216,6 @@ export default function App() {
         {currentTab === 'alerts' && (
           <AlertsView
             alerts={alerts}
-            accounts={accounts}
-            invoices={invoices}
-            products={products}
-            orders={orders}
             currentRole={currentRole}
             stateMode={componentStateMode}
           />
